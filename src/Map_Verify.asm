@@ -23,7 +23,7 @@ org $89AD0A
 
 
 org $A2F500
-print pc, " freespace bank $82 start"
+print pc, " freespace bank $A2 start"
 VerifyTrueCompletion:
 {
     ; check if Zebes timebomb set
@@ -322,4 +322,4 @@ Verified_MapTiles:
 
 NumberGFXTable:
     dw #$2C45, #$2C3C, #$2C3D, #$2C3E, #$2C3F, #$2C40, #$2C41, #$2C42, #$2C43, #$2C44
-print pc, " freespace bank $82 end"
+print pc, " freespace bank $A2 end"
