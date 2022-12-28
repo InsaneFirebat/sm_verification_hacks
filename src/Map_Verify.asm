@@ -40,7 +40,7 @@ VerifyTrueCompletion:
     LDY #$0002 : BRA .draw
 
     ; failed map tile check
-+   JSR SaveToSRAM
++;   JSR SaveToSRAM
     LDY #$0000 : JSR DrawHUD
     JSR DrawMissingTiles
     ; overwritten code

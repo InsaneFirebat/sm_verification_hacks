@@ -76,9 +76,9 @@ VerifyTrueCompletion:
 
   .draw
     CPY #$000C : BEQ +
-    PHY
-    JSR SaveToSRAM
-    PLY
+;    PHY
+;    JSR SaveToSRAM
+;    PLY
     TYA : BEQ .map_tiles
 +   JSR DrawHUD
     ; overwritten code
