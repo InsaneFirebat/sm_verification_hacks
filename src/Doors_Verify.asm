@@ -4,6 +4,9 @@
 
 lorom
 
+!VERSION_MAJOR = 1
+!VERSION_MINOR = 1
+
 !ram_FailAddress = $7ED910
 
 
@@ -77,3 +80,18 @@ HexGFXTable:
     dw #$2C45, #$2C3C, #$2C3D, #$2C3E, #$2C3F, #$2C40, #$2C41, #$2C42, #$2C43, #$2C44
     dw #$2CE0, #$2CE1, #$2CE2, #$2CE3, #$2CE4, #$2CE5
 print pc, " freespace bank $82 end"
+
+
+; Title menu watermark
+
+org $8EDC70
+    ;           D      O      O      R  
+    dw $000F, $006D, $0078, $0078, $007B
+
+org $8EDCB0
+    ;    V      E      R      I      F      Y  
+    dw $007F, $006E, $007B, $0072, $006F, $0082
+
+org $8EDCF0
+    ;           v                          .                      
+    dw $000F, $007F, !VERSION_MAJOR|$60, $0088, !VERSION_MINOR|$60

@@ -4,6 +4,9 @@
 
 lorom
 
+!VERSION_MAJOR = 1
+!VERSION_MINOR = 2
+
 table HUDfont.tbl
 
 !ram_MissingTiles = $0A02
@@ -493,3 +496,18 @@ CeresRidleyDefeated:
     JMP $BD9A
 }
 print pc, " freespace bank $A6 end"
+
+
+; Title menu watermark
+
+org $8EDC70
+    ;                  T      C  
+    dw $000F, $000F, $007D, $006C
+
+org $8EDCB0
+    ;    V      E      R      I      F      Y  
+    dw $007F, $006E, $007B, $0072, $006F, $0082
+
+org $8EDCF0
+    ;           v                          .                      
+    dw $000F, $007F, !VERSION_MAJOR|$60, $0088, !VERSION_MINOR|$60

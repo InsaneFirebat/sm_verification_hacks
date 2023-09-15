@@ -4,6 +4,9 @@
 
 lorom
 
+!VERSION_MAJOR = 1
+!VERSION_MINOR = 2
+
 table HUDfont.tbl
 
 !ram_MissingTiles = $0A02
@@ -323,3 +326,18 @@ Verified_MapTiles:
 NumberGFXTable:
     dw #$2C45, #$2C3C, #$2C3D, #$2C3E, #$2C3F, #$2C40, #$2C41, #$2C42, #$2C43, #$2C44
 print pc, " freespace bank $A2 end"
+
+
+; Title menu watermark
+
+org $8EDC70
+    ;                  M      A      P  
+    dw $000F, $000F, $0076, $006A, $0079
+
+org $8EDCB0
+    ;    V      E      R      I      F      Y  
+    dw $007F, $006E, $007B, $0072, $006F, $0082
+
+org $8EDCF0
+    ;           v                          .                      
+    dw $000F, $007F, !VERSION_MAJOR|$60, $0088, !VERSION_MINOR|$60
