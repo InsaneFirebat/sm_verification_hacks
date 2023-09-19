@@ -14,7 +14,7 @@ echo Building Map Completion Verification hack
 copy *.sfc ..\build
 ..\tools\asar --no-title-check ..\src\Map_Verify.asm ..\build\00.sfc
 ..\tools\asar --no-title-check ..\src\Map_Verify.asm ..\build\ff.sfc
-python create_ips.py ..\build\00.sfc ..\build\ff.sfc ..\build\MapCompletionVerification_v1.2.ips
+python create_ips.py ..\build\00.sfc ..\build\ff.sfc ..\build\MapCompletionVerification_v1.3.ips
 
 echo Building All Doors Verification hack
 copy *.sfc ..\build

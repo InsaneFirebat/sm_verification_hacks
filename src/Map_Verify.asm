@@ -5,7 +5,7 @@
 lorom
 
 !VERSION_MAJOR = 1
-!VERSION_MINOR = 2
+!VERSION_MINOR = 3
 
 table HUDfont.tbl
 
@@ -230,7 +230,8 @@ Fail_MapTiles: ; unused
     db "MAP", $FF
 
 Success:
-    db "VALID", $FF
+    ; 1244
+    db $00, $01, $03, $03, $FF
 
 Verified_CurrentMapTiles: ; (Crateria)
     db $00, $00, $00, $00, $00, $00, $00, $7F, $00, $00, $00, $7F, $00, $1F, $FF, $FF
