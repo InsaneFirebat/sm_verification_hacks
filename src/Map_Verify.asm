@@ -230,8 +230,7 @@ Fail_MapTiles: ; unused
     db "MAP", $FF
 
 Success:
-    ; 1244
-    db $00, $01, $03, $03, $FF
+    db "1244", $FF
 
 Verified_CurrentMapTiles: ; (Crateria)
     db $00, $00, $00, $00, $00, $00, $00, $7F, $00, $00, $00, $7F, $00, $1F, $FF, $FF
