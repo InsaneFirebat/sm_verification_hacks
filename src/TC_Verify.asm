@@ -5,11 +5,12 @@
 lorom
 
 !VERSION_MAJOR = 1
-!VERSION_MINOR = 2
+!VERSION_MINOR = 3
 
 table HUDfont.tbl
 
 !ram_MissingTiles = $0A02
+!ram_Suitless = $0A1A
 !ram_RidleyDefeated = $7ED910
 !ram_RidleyMapExplored = $7ED912
 !ram_FailAddress = $7ED824
@@ -83,6 +84,8 @@ VerifyTrueCompletion:
 ;    JSR SaveToSRAM
 ;    PLY
     TYA : BEQ .map_tiles
++   LDA !ram_Suitless : CMP #$0002 : BNE +
+    LDY #$000E
 +   JSR DrawHUD
     ; overwritten code
     LDX #$0000 : TXY
@@ -216,14 +219,29 @@ VerifyItems:
     LDX #$D870 : LDY #$0000
 
   .loop
-    LDA $7E0000,X : CMP.w Verified_Items,Y : BNE .failed
+    LDA $7E0000,X : CMP.w Verified_Items,Y : BNE .check_suits
     INY #2
     INX #2 : CPX #$D884 : BMI .loop
 
     ; Verified
     SEC : RTS
 
-  .failed
+  .check_suits
+    ; Varia check for suitless compatibility
+    CPX #$D876 : BNE .gravity
+    CMP #$FFFE : BNE .fail
+    INC !ram_Suitless
+    INY #2 : INX #2
+    BRA .loop
+
+  .gravity
+    CPX #$D880 : BNE .fail
+    CMP #$FF7F : BNE .fail
+    INC !ram_Suitless
+    INY #2 : INX #2
+    BRA .loop
+
+  .fail
     STA !ram_FailValue
     TXA : STA !ram_FailAddress
     CLC : RTS
@@ -254,7 +272,7 @@ DrawHUD:
     LDY #$0000 : TYX
 -   LDA ($12),Y : CMP #$FF : BEQ .done
     STA $7EC6B0,X : INX
-    LDA #$2C : STA $7EC6B0,X : INX
+    LDA #$3C : STA $7EC6B0,X : INX
     INY : BRA -
 
   .done
@@ -348,7 +366,8 @@ HUDTextLookupTable:
     dw #Fail_MapStations
     dw #Fail_Doors
     dw #Fail_ItemCollection
-    dw #Success
+    dw #Success_TC
+    dw #Success_Suitless
 
 Fail_MapTiles:
     db "MAP", $FF
@@ -368,8 +387,11 @@ Fail_Doors:
 Fail_ItemCollection:
     db "ITEMS", $FF
 
-Success:
-    db "VALID", $FF
+Success_TC:
+    db "TRUEC", $FF
+
+Success_Suitless:
+    db "SUITL", $FF
 
 Verified_Events:
     db $E5, $FF, $2F, $00 ; dummy byte for word access
