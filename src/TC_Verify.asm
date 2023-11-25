@@ -272,7 +272,7 @@ DrawHUD:
     LDY #$0000 : TYX
 -   LDA ($12),Y : CMP #$FF : BEQ .done
     STA $7EC6B0,X : INX
-    LDA #$3C : STA $7EC6B0,X : INX
+    LDA #$28 : STA $7EC6B0,X : INX
     INY : BRA -
 
   .done
